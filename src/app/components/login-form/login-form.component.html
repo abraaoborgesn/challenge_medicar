@@ -1,11 +1,11 @@
-<form class="form" (submit)="handleLogin()">
+<form class="form" [formGroup]="createForm" (submit)="handleLogin()">
   <mat-form-field appearance="outline">
     <mat-label>Email ou Login</mat-label>
     <input
       matInput
       name="username"
       placeholder="Email ou Login"
-      [(ngModel)]="user.username"
+      formControlName="username"
     />
   </mat-form-field>
 
@@ -16,7 +16,7 @@
       name="password"
       placeholder="Senha"
       type="password"
-      [(ngModel)]="user.password"
+      formControlName="password"
       [attr.type]="showPassword ? 'text' : 'password'"
     />
     <mat-icon matSuffix (click)="handleShowPassword()">visibility</mat-icon>

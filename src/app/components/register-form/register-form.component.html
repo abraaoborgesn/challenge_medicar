@@ -41,7 +41,7 @@
     <mat-icon matSuffix (click)="handleShowPassword()">visibility</mat-icon>
 
     <mat-error *ngIf="registerForm.controls['password'].errors?.['required']"> Campo Obrigatório</mat-error>
-    <mat-error *ngIf="registerForm.controls['password'].errors?.['minlength']"> A senha deve ter mais que 6 caracteres</mat-error>
+    <mat-error *ngIf="registerForm.controls['password'].errors?.['minlength']"> A senha deve ter mais que 4 caracteres</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -57,7 +57,7 @@
     <mat-icon matSuffix (click)="handleShowPassword()">visibility</mat-icon>
 
     <mat-error *ngIf="registerForm.controls['confirmPassword'].errors?.['required']"> Campo Obrigatório</mat-error>
-    <mat-error *ngIf="registerForm.controls['confirmPassword'].errors?.['minlength']"> A senha deve ter mais que 6 caracteres</mat-error>
+    <mat-error *ngIf="registerForm.controls['confirmPassword'].errors?.['minlength']"> A senha deve ter mais que 4 caracteres</mat-error>
   </mat-form-field>
 
   <div class="buttons">

@@ -29,8 +29,8 @@ export class AuthenticationService {
     private route: Router
   ) { }
 
-  set userName(user: string) {
-    this.userData.next(user);
+  set userName(userName: string) {
+    this.userData.next(userName);
   }
   get userName(): string {
     return this.userData.value
@@ -56,7 +56,9 @@ export class AuthenticationService {
 
   register(user: newUser): Observable<User> {
     return this.http.post<User>(`${this.API}/users`, user).pipe(
-      map(res => res),
+      map(res => {
+        console.log(res)
+      }),
       catchError((err) => this.handleError(err))
     )
   }
@@ -87,18 +89,10 @@ export class AuthenticationService {
     this.token = <string>localStorage.getItem('token');
 
     this.token ? this.route.navigate(['home']) : this.route.navigate([''])
-    // console.log(this.user)
+    // console.log(this.userName)
     let userName = <string>localStorage.getItem('userName');
     this.userName = <string>JSON.parse(userName)
   }
-
-  // showTokenUser(): void {
-  //   console.log(this.user)
-  //   console.log(this.token)
-  //   console.log(this.userData.value)
-  // }
-
-
 }
 
 

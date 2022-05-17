@@ -18,8 +18,8 @@ export class RegisterFormComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       email:['', [Validators.required, Validators.email]],
-      password:['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword:['', [Validators.required, Validators.minLength(6)]]
+      password:['', [Validators.required, Validators.minLength(4)]],
+      confirmPassword:['', [Validators.required, Validators.minLength(4)]]
     });
   }
 
@@ -38,7 +38,7 @@ export class RegisterFormComponent implements OnInit {
   handleCreate(): void {
     if (this.registerForm.valid) {
       if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
-        this.authService.showMessage('As senhas não são iguais', true);
+        this.authService.showMessage('As senhas não são iguais. Tente novamente!', true);
         return
       }
       this.authService.register(this.registerForm.value).subscribe(() => {
