@@ -9,7 +9,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class HeaderHomeComponent implements OnInit {
 
   get username(): string {
-    return this.authentication.user.username
+    return this.authentication.userName
   }
 
   constructor(private route: Router, private authentication: AuthenticationService) { }

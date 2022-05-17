@@ -18,9 +18,9 @@ interface newUser {
 })
 export class AuthenticationService {
 
-  private readonly API = `${environment.apiUrl}/users`;
+  private readonly API = `${environment.apiUrl}`;
 
-  private userData = new BehaviorSubject<User>({ username:'' })
+  private userData = new BehaviorSubject<string>('')
   private tokenData = new BehaviorSubject<string>('')
 
   constructor(
@@ -29,10 +29,10 @@ export class AuthenticationService {
     private route: Router
   ) { }
 
-  set user(user: User) {
+  set userName(user: string) {
     this.userData.next(user);
   }
-  get user(): User {
+  get userName(): string {
     return this.userData.value
   }
 
@@ -43,27 +43,25 @@ export class AuthenticationService {
     return this.tokenData.value
   }
 
-  login(user: User): Observable<string> {
-    return this.http.post<string>(`${this.API}/login`, user).pipe(
+  authenticate(user: User): Observable<string> {
+    return this.http.post<string>(`${this.API}/users/login`, user).pipe(
       map((res: any) => {
         this.setToken(res.token);
-        this.setUser(user);
-
+        this.setUserName(user.username);
 
         return res
     }),
-    catchError((e) => this.handleError(e)))
+    catchError((err) => this.handleError(err)))
   }
 
   register(user: newUser): Observable<User> {
-    return this.http.post<User>(`${this.API}/`, user).pipe(
-      map(e => e),
+    return this.http.post<User>(`${this.API}/users`, user).pipe(
+      map(res => res),
       catchError((err) => this.handleError(err))
     )
   }
 
-  handleError(e: any): Observable<any> {
-
+  handleError(err: any): Observable<any> {
     this.showMessage('Verifique as informações e tente novamente!', true);
     return EMPTY
   }
@@ -81,8 +79,8 @@ export class AuthenticationService {
     localStorage.setItem('token', token)
   }
 
-  setUser(user: User): void {
-    localStorage.setItem('user', JSON.stringify(user))
+  setUserName(userName: string): void {
+    localStorage.setItem('userName', JSON.stringify(userName))
   }
 
   tokenExists(): void {
@@ -90,8 +88,8 @@ export class AuthenticationService {
 
     this.token ? this.route.navigate(['home']) : this.route.navigate([''])
     // console.log(this.user)
-    let user = <string>localStorage.getItem('user');
-    this.user = <User>JSON.parse(user)
+    let userName = <string>localStorage.getItem('userName');
+    this.userName = <string>JSON.parse(userName)
   }
 
   // showTokenUser(): void {

@@ -35,7 +35,7 @@ export class RegisterFormComponent implements OnInit {
     this.route.navigate([''])
   }
 
-  create(): void {
+  handleCreate(): void {
     if (this.registerForm.valid) {
       if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
         this.authService.showMessage('As senhas não são iguais', true);
