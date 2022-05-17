@@ -1,0 +1,67 @@
+<div class="main">
+  <h1 mat-dialog-title>Nova Consulta</h1>
+  <!-- <div mat-dialog-content>
+    This dialog showcases the title, close, content and actions elements.
+  </div> -->
+  <form class="form" >
+    <mat-form-field appearance="outline">
+      <mat-label>Especialidade</mat-label>
+      <mat-select (selectionChange)="handleEspecialidade($event.value)">
+        <mat-option></mat-option>
+        <mat-option
+          *ngFor="let especialidade of especialidades"
+          [value]="especialidade.nome"
+        >
+          {{ especialidade.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- MEDICO -->
+    <mat-form-field appearance="outline">
+      <mat-label>Médico</mat-label>
+      <mat-select [disabled]="medicos2.length <= 0" (selectionChange)="handleMedico($event.value)">
+        <mat-option></mat-option>
+        <mat-option
+          *ngFor="let medico of medicos2"
+          [value]="medico.id"
+        >
+          {{ medico.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- DATA -->
+    <mat-form-field appearance="outline">
+      <mat-label>Data</mat-label>
+      <mat-select [disabled]="agendas2.length <= 0" (selectionChange)="handleData($event.value)" [(ngModel)]="appointment.agenda_id" name="data">
+        <mat-option></mat-option>
+        <mat-option
+         *ngFor="let agenda of agendas2"
+          [value]="agenda.id"
+         >
+          {{ agenda.dia | date: "dd/MM/yyyy" }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <!-- HORÁRIO -->
+    <mat-form-field appearance="outline">
+      <mat-label>Hora</mat-label>
+      <mat-select [disabled]="horarios.length <= 0" [(ngModel)]="appointment.horario" (selectionChange)="habilitarForm()" name="horario">
+        <mat-option></mat-option>
+        <mat-option *ngFor="let horario of horarios" [value]="horario">
+          {{ horario }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <!-- BUTTONS -->
+    <div class="buttons">
+      <button class="cancel" (click)="handleClose()">
+        Cancelar
+      </button>
+      <button class="confirm" (click)="handleSubmit()" [disabled]="habilitarButton">Confirmar</button>
+    </div>
+  </form>
+</div>

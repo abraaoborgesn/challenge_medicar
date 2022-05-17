@@ -1,0 +1,55 @@
+table {
+  width: 100%;
+  background-color: none;
+}
+
+tr:nth-child(2n) {
+  background-color: #F8F8F8
+  ;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  border: none;
+}
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+  padding: 0;
+}
+
+table {
+  background-color: transparent;
+}
+
+.delete {
+  color: #49B4BB;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: .63rem;
+  margin-left: 2.65rem;
+  font-weight: 400;
+
+  transition: background-color .2s;
+
+  &:hover {
+    background-color: #D9F1F3;
+  }
+
+}
+.actions {
+  padding: 0;
+}
+
+.teste {
+  size: 100.5px
+}
+
+.mat-header-cell {
+  color: #A8A8A8;
+  font-weight: 700;
+  font-size: .75rem;
+}
+
+.mat-cell {
+  color: #444444;
+  font-size: .75rem;
+}

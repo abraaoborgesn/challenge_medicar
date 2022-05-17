@@ -1,0 +1,68 @@
+<form class="form" [formGroup]="registerForm">
+  <h1>Crie sua conta</h1>
+  <mat-form-field appearance="outline">
+    <mat-label>Nome</mat-label>
+    <input
+      matInput
+      name="name"
+      placeholder="Nome"
+      formControlName="name"
+    />
+
+    <mat-error *ngIf="registerForm.controls['name'].errors?.['required']"> Campo Obrigatório</mat-error>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      name="email"
+      placeholder="Email"
+      formControlName="email"
+    />
+    <mat-error *ngIf="registerForm.controls['email'].errors?.['email']">E-mail inválido</mat-error>
+
+    <mat-error *ngIf="registerForm.controls['email'].errors?.['required']"> Campo Obrigatório</mat-error>
+  </mat-form-field>
+
+
+
+  <mat-form-field appearance="outline">
+    <mat-label>Senha</mat-label>
+    <input
+      matInput
+      name="password"
+      type="password"
+      placeholder="Senha"
+      [attr.type]="showPassword ? 'text' : 'password'"
+      formControlName="password"
+    />
+    <mat-icon matSuffix (click)="handleShowPassword()">visibility</mat-icon>
+
+    <mat-error *ngIf="registerForm.controls['password'].errors?.['required']"> Campo Obrigatório</mat-error>
+    <mat-error *ngIf="registerForm.controls['password'].errors?.['minlength']"> A senha deve ter mais que 6 caracteres</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Confirmar senha</mat-label>
+    <input
+      matInput
+      name="confirmPassword"
+      type="password"
+      placeholder="Confirmar Senha"
+      [attr.type]="showPassword ? 'text' : 'password'"
+      formControlName="confirmPassword"
+    />
+    <mat-icon matSuffix (click)="handleShowPassword()">visibility</mat-icon>
+
+    <mat-error *ngIf="registerForm.controls['confirmPassword'].errors?.['required']"> Campo Obrigatório</mat-error>
+    <mat-error *ngIf="registerForm.controls['confirmPassword'].errors?.['minlength']"> A senha deve ter mais que 6 caracteres</mat-error>
+  </mat-form-field>
+
+  <div class="buttons">
+    <button class="cancel" (click)="cancel()" >Cancelar</button>
+    <button class="confirm" (click)="create()">Confirmar</button>
+  </div>
+
+</form>

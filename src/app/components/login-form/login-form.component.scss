@@ -1,0 +1,32 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+}
+
+mat-form-field {
+  color:#a8a8a8;
+  cursor: pointer;
+}
+
+
+.mat-form-field-wrapper {
+  padding-bottom: 8px;
+}
+
+mat-icon {
+  color: #a8a8a8;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+}
+
+button {
+  width: 11.25rem;
+  height: 2.5rem;
+  font-size: 1.12rem;
+}
+

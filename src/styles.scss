@@ -1,0 +1,87 @@
+/* You can add global styles to this file, and also import other style files */
+
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: Roboto, sans-serif;
+}
+
+button {
+  text-decoration: none;
+  border-color: transparent;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+.error-message {
+  background-color: rgb(213, 6, 6);
+  height: 3rem;
+  color: white;
+  text-align: center;
+  font-size: 10rem;
+}
+
+button.confirm {
+  background-color: #49B4BB;
+  border-radius: .5rem;
+  width: 11.25rem;
+  height: 2.5rem;
+  padding: 0.62rem;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background-color .2s;
+
+  &:hover {
+    background-color: #90D3D7;
+  }
+}
+
+button.confirm:disabled {
+  background-color: #D9F1F3;
+  color: #BBB
+}
+
+
+button.cancel {
+  background-color: #FFFFFF;
+  border-radius: .5rem;
+  width: 11.25rem;
+  height: 2.5rem;
+  padding: 0.62rem;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: #49B4BB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background-color .2s;
+
+  &:hover {
+    background-color: #D9F1F3;
+  }
+}
+
+.sucess-message {
+  background-color: rgb(30, 213, 6);
+  height: 20px;
+  color: white;
+}
+
+
