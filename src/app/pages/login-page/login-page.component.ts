@@ -11,7 +11,7 @@ export class LoginPageComponent implements OnInit {
   constructor(private authentication: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.authentication.tokenExists() // não deixar voltar para página de login se tiver com o token no localStorage
+    this.authentication.tokenExists() //não deixar voltar para página de login se não tiver com o token no localStorage
   }
 
 }
