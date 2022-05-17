@@ -3,7 +3,7 @@
   <!-- <div mat-dialog-content>
     This dialog showcases the title, close, content and actions elements.
   </div> -->
-  <form class="form" >
+  <form class="form" (submit)="handleSubmit()" >
     <mat-form-field appearance="outline">
       <mat-label>Especialidade</mat-label>
       <mat-select (selectionChange)="handleEspecialidade($event.value)">
@@ -61,7 +61,7 @@
       <button class="cancel" (click)="handleClose()">
         Cancelar
       </button>
-      <button class="confirm" (click)="handleSubmit()" [disabled]="habilitarButton">Confirmar</button>
+      <button class="confirm" type="submit" [disabled]="habilitarButton">Confirmar</button>
     </div>
   </form>
 </div>
