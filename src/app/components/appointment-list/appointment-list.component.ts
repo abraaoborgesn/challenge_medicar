@@ -10,24 +10,6 @@ import { Location } from '@angular/common';
   styleUrls: ['./appointment-list.component.scss']
 })
 export class AppointmentListComponent implements OnInit {
-  // appointments!: Appointment[]
-  //   {
-  //     id: 2,
-  //     dia: "2020-03-01",
-  //     horario: "09:00",
-  //     data_agendamento: "2020-02-01T10:45:0-03:00",
-  //     medico: {
-  //       id: 1,
-  //       crm: 3711,
-  //       nome: "Drauzio Varella",
-  //       especialidade: {
-  //         id: 2,
-  //         nome: "Pediatria",
-  //       },
-  //     },
-  //   }
-  // ]
-
   displayedColumns = [
     'ESPECIALIDADE',
     'PROFISSIONAL',
@@ -35,7 +17,7 @@ export class AppointmentListComponent implements OnInit {
     'HORA',
     'actions'
   ]
-  constructor(private appointmentService: AppointmentService, private route: Router) {
+  constructor(private appointmentService: AppointmentService, private router: Router) {
   }
 
   get appointments():Appointment[] {
@@ -45,10 +27,9 @@ export class AppointmentListComponent implements OnInit {
   ngOnInit(): void {
     this.appointmentService.getAppointments().subscribe((appointments) => {
       this.appointmentService.appointments = appointments
-      console.log(appointments)
+      // console.log(appointments)
     })
   }
-
 
   // forTable
   especialidade(appoint: Appointment): string {

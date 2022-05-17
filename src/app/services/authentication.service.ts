@@ -26,7 +26,7 @@ export class AuthenticationService {
   constructor(
     private http: HttpClient,
     private snakBar: MatSnackBar,
-    private route: Router
+    private router: Router
   ) { }
 
   set userName(userName: string) {
@@ -64,7 +64,7 @@ export class AuthenticationService {
   }
 
   handleError(err: any): Observable<any> {
-    this.showMessage('Verifique as informações e tente novamente!', true);
+    this.showMessage('Login ou senha incorretos. Tente novamente!', true);
     return EMPTY
   }
 
@@ -88,7 +88,7 @@ export class AuthenticationService {
   tokenExists(): void {
     this.token = <string>localStorage.getItem('token');
 
-    this.token ? this.route.navigate(['home']) : this.route.navigate([''])
+    this.token ? this.router.navigate(['home']) : this.router.navigate([''])
     // console.log(this.userName)
     let userName = <string>localStorage.getItem('userName');
     this.userName = <string>JSON.parse(userName)

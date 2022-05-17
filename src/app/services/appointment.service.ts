@@ -34,7 +34,7 @@ export class AppointmentService {
   get especialidades(): Specialty[] {
     return this.especialidadeData.value;
   }
-  /////////////////////////////////////////////// tentativa extra
+
   set medicos(medico: Doctor[]) {
     this.medicoData.next(medico)
   }
@@ -94,36 +94,6 @@ export class AppointmentService {
       headers: {
         Authorization: `Token ${this.authentication.token}`
       }
-    }).pipe(
-      map((res: any) => {
-        return <Appointment>{}
-      })
-    )
+    })
   }
-
-
-  // getMedicos(id: number): Observable<Doctor[]> {
-  //   return this.http.get<Doctor[]>(`${this.API}/medicos/?especialidade=${id}`, {
-  //     headers: {
-  //       Authorization: `Token ${this.authentication.token}`
-  //     }
-  //   })
-  // }
-
-  // getData(id: number): Observable<Agenda[]> {
-  //   return this.http.get<Agenda[]>(`${this.API}/agendas/?medico=${id}`, {
-  //     headers: {
-  //       Authorization: `Token ${this.authentication.token}`
-  //     }
-  //   })
-  // }
-
-  // getHorario(id: number): Observable<Agenda[]> {
-  //   return this.http.get<Agenda[]>(`${this.API}/agendas/?`)
-  // }
-
-
-
-
-
 }

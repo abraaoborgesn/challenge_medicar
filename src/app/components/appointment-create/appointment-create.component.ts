@@ -13,18 +13,6 @@ import { Appointment } from 'src/app/interfaces/appointments';
   styleUrls: ['./appointment-create.component.scss']
 })
 export class AppointmentCreateComponent implements OnInit {
-  // especialidades: Specialty[] = [
-  //   {
-  //     nome: 'Teste1'
-  //   },
-  //   {
-  //     nome: 'Teste2'
-  //   },
-  //   {
-  //     nome: 'Teste3'
-  //   }
-  // ]
-
   // medicos: Doctor[]
   // agendas: Agenda[]
   medicos2: Doctor[];
@@ -36,8 +24,6 @@ export class AppointmentCreateComponent implements OnInit {
 
 
   constructor( private matDialogRef: MatDialogRef<any>, private appointmentService: AppointmentService) {
-    // this.medicos = []
-    // this.agendas = []
     this.medicos2 = []
     this.agendas2 = []
     this.horarios = []
@@ -60,11 +46,9 @@ export class AppointmentCreateComponent implements OnInit {
   ngOnInit(): void {
     this.appointmentService.getSpecialties().subscribe((especialidades) => {
       this.appointmentService.especialidades = especialidades
-      console.log(this.especialidades)
   })
     this.appointmentService.getMedicos2().subscribe((medicos) => {
       this.appointmentService.medicos = medicos
-      console.log(this.medicos)
   })
     this.appointmentService.getAgenda().subscribe((agendas) => {
       this.appointmentService.agendas = agendas
@@ -76,64 +60,44 @@ export class AppointmentCreateComponent implements OnInit {
     this.habilitarButton = !this.habilitarButton
   }
 
+  //Close modal
   handleClose(): void {
     this.matDialogRef.close()
   }
 
-  // handleEspecialidade(value: number): void {
-  //   this.appointmentService.getMedicos(value).subscribe((medicos) => {this.medicos = medicos})
-  //   // console.log(this.medicos)
-  // }
-
   //Buscando os dados
   handleEspecialidade(value: string): void {
-    let newMedicos = this.medicos.filter(e => {
-      return e.especialidade.nome === value
+    let newMedicos = this.medicos.filter(res => {
+      return res.especialidade.nome === value
     })
 
     this.medicos2 = [...newMedicos]
   }
 
   handleMedico(value: number): void {
-    let newAgendas = this.agendas.filter(e => {
-      return e.medico.id === value
+    let newAgendas = this.agendas.filter(res => {
+      return res.medico.id === value
     })
 
     this.agendas2 = [...newAgendas]
   }
 
-  // handleData(value: number): void {
-  //   let agendasForId = this.agendas.filter(e => {
-  //     return e.id === value
-  //   })
-
-  //   this.horarios = agendasForId.horarios
-  // }
-
   handleData(value: number) {
     this.horarios = <string[]>(
-      this.agendas.find((data) => data.id == value)?.horarios
+      this.agendas.find((res) => res.id == value)?.horarios
     );
   }
 
-  // handleMedico(value: number): void {
-  //   this.appointmentService.getData(value).subscribe((agendas) => {this.agendas = agendas})
-  // }
-
-  // handleData(value: number): void {
-  //   this.appointmentService.getHorario(value)
-  // }
-
+  //Submit
   handleSubmit(): void {
-    console.log(this.appointment)
+    // console.log(this.appointment)
     this.appointmentService.makeAppointment(this.appointment).subscribe((appoint: Appointment) => {
       let newAppoints = [...this.appointmentService.appointments]
       newAppoints.push(appoint)
-      this.appointmentService.getAppointments().subscribe((appointments) => { // atualizar as consultas
+      this.appointmentService.getAppointments().subscribe((appointments) => { // refresh appointments
         this.appointmentService.appointments = appointments
       })
       this.appointmentService.appointments = newAppoints
-
     })
 
     this.handleClose()

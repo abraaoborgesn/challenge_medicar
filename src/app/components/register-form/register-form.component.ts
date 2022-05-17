@@ -12,7 +12,7 @@ export class RegisterFormComponent implements OnInit {
   showPassword: boolean;
   registerForm!: FormGroup;
 
-  constructor(private route: Router, private formBuilder: FormBuilder, private authService: AuthenticationService) {
+  constructor(private router: Router, private formBuilder: FormBuilder, private authService: AuthenticationService) {
     this.showPassword = false
 
     this.registerForm = this.formBuilder.group({
@@ -32,7 +32,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
   cancel(): void {
-    this.route.navigate([''])
+    this.router.navigate([''])
   }
 
   handleCreate(): void {
@@ -43,7 +43,7 @@ export class RegisterFormComponent implements OnInit {
       }
       this.authService.register(this.registerForm.value).subscribe(() => {
         this.authService.showMessage('Cadastro realizado com sucesso!');
-        this.route.navigate(['']);
+        this.router.navigate(['']);
       })
     }
   }

@@ -12,13 +12,13 @@ export class HeaderHomeComponent implements OnInit {
     return this.authentication.userName
   }
 
-  constructor(private route: Router, private authentication: AuthenticationService) { }
+  constructor(private router: Router, private authentication: AuthenticationService) { }
 
   ngOnInit(): void {
   }
 
   handleLogout(): void {
     localStorage.clear();
-    this.route.navigate([''])
+    this.router.navigate([''])
   }
 }

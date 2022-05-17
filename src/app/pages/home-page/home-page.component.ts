@@ -11,7 +11,7 @@ import { AppointmentCreateComponent } from 'src/app/components/appointment-creat
 })
 export class HomePageComponent implements OnInit {
   // username!: string
-  constructor( private route: Router, private authentication: AuthenticationService, private dialog: MatDialog) { }
+  constructor( private router: Router, private authentication: AuthenticationService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.authentication.tokenExists()

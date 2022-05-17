@@ -14,7 +14,7 @@ export class LoginFormComponent implements OnInit {
   showPassword: boolean = false
   createForm: FormGroup
 
-  constructor(private route: Router, private authentication: AuthenticationService, private formBuilder: FormBuilder) {
+  constructor(private router: Router, private authentication: AuthenticationService, private formBuilder: FormBuilder) {
     this.createForm = this.formBuilder.group({
       username: [''],
       password: ['']
@@ -25,7 +25,7 @@ export class LoginFormComponent implements OnInit {
 
   handleLogin(): void {
     this.authentication.authenticate(this.createForm.value).subscribe(() => {
-      this.route.navigate(['home'])
+      this.router.navigate(['home'])
     })
   }
 
@@ -34,7 +34,7 @@ export class LoginFormComponent implements OnInit {
   // }
 
   handleRegister(): void {
-    this.route.navigate(['register'])
+    this.router.navigate(['register'])
   }
 
   handleShowPassword(): void {
