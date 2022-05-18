@@ -1,8 +1,8 @@
-import { Specialty } from "./specialty";
+import { Specialty } from './specialty';
 
 export interface Doctor {
-  id?: number,
-  crm: number,
-  nome: string,
-  especialidade: Specialty
+  id?: number;
+  crm: number;
+  nome: string;
+  especialidade: Specialty;
 }

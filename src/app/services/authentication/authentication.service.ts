@@ -1,46 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, catchError, EMPTY, map, Observable } from 'rxjs';
-import { User } from '../interfaces/user-auth';
+import { User } from '../../interfaces/user-auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-
 
 interface newUser {
-  name: string,
-  email: string,
-  password: string,
-  confirmPassword: string
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
 }
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
-
   private readonly API = `${environment.apiUrl}`;
 
-  private userData = new BehaviorSubject<string>('')
-  private tokenData = new BehaviorSubject<string>('')
+  private userData = new BehaviorSubject<string>('');
+  private tokenData = new BehaviorSubject<string>('');
 
-  constructor(
-    private http: HttpClient,
-    private snakBar: MatSnackBar,
-    private router: Router
-  ) { }
+  constructor(private http: HttpClient, private snakBar: MatSnackBar) {}
 
   set userName(userName: string) {
     this.userData.next(userName);
   }
   get userName(): string {
-    return this.userData.value
+    return this.userData.value;
   }
 
   set token(token: string) {
-    this.tokenData.next(token)
+    this.tokenData.next(token);
   }
   get token(): string {
-    return this.tokenData.value
+    return this.tokenData.value;
   }
 
   authenticate(user: User): Observable<string> {
@@ -49,23 +42,24 @@ export class AuthenticationService {
         this.setToken(res.token);
         this.setUserName(user.username);
 
-        return res
-    }),
-    catchError((err) => this.handleError(err)))
+        return res;
+      }),
+      catchError((err) => this.handleError(err))
+    );
   }
 
   register(user: newUser): Observable<User> {
     return this.http.post<User>(`${this.API}/users`, user).pipe(
-      map(res => {
-        console.log(res)
+      map((res) => {
+        console.log(res);
       }),
       catchError((err) => this.handleError(err))
-    )
+    );
   }
 
   handleError(err: any): Observable<any> {
     this.showMessage('Login ou senha incorretos. Tente novamente!', true);
-    return EMPTY
+    return EMPTY;
   }
 
   showMessage(message: string, isError: boolean = false): void {
@@ -74,25 +68,25 @@ export class AuthenticationService {
       horizontalPosition: 'right',
       panelClass: isError ? 'error-message' : 'sucess-message',
       duration: 2000,
-    })
+    });
   }
 
   setToken(token: string): void {
-    localStorage.setItem('token', token)
+    localStorage.setItem('token', token);
   }
 
   setUserName(userName: string): void {
-    localStorage.setItem('userName', JSON.stringify(userName))
+    localStorage.setItem('userName', JSON.stringify(userName));
   }
 
-  tokenExists(): void {
+  getUserNameAndToken(): void {
+    this.userName = <string>(
+      JSON.parse(<string>localStorage.getItem('userName'))
+    );
     this.token = <string>localStorage.getItem('token');
+  }
 
-    this.token ? this.router.navigate(['home']) : this.router.navigate([''])
-    // console.log(this.userName)
-    let userName = <string>localStorage.getItem('userName');
-    this.userName = <string>JSON.parse(userName)
+  userIsAuthenticated() {
+    return localStorage.getItem('token') ? true : false;
   }
 }
-
-

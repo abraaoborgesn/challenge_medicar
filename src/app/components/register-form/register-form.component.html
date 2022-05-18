@@ -2,31 +2,24 @@
   <h1>Crie sua conta</h1>
   <mat-form-field appearance="outline">
     <mat-label>Nome</mat-label>
-    <input
-      matInput
-      name="name"
-      placeholder="Nome"
-      formControlName="name"
-    />
+    <input matInput name="name" placeholder="Nome" formControlName="name" />
 
-    <mat-error *ngIf="registerForm.controls['name'].errors?.['required']"> Campo Obrigatório</mat-error>
+    <mat-error *ngIf="registerForm.controls['name'].errors?.['required']">
+      Campo Obrigatório</mat-error
+    >
   </mat-form-field>
-
 
   <mat-form-field appearance="outline">
     <mat-label>Email</mat-label>
-    <input
-      matInput
-      name="email"
-      placeholder="Email"
-      formControlName="email"
-    />
-    <mat-error *ngIf="registerForm.controls['email'].errors?.['email']">E-mail inválido</mat-error>
+    <input matInput name="email" placeholder="Email" formControlName="email" />
+    <mat-error *ngIf="registerForm.controls['email'].errors?.['email']"
+      >E-mail inválido</mat-error
+    >
 
-    <mat-error *ngIf="registerForm.controls['email'].errors?.['required']"> Campo Obrigatório</mat-error>
+    <mat-error *ngIf="registerForm.controls['email'].errors?.['required']">
+      Campo Obrigatório</mat-error
+    >
   </mat-form-field>
-
-
 
   <mat-form-field appearance="outline">
     <mat-label>Senha</mat-label>
@@ -40,8 +33,12 @@
     />
     <mat-icon matSuffix (click)="handleShowPassword()">visibility</mat-icon>
 
-    <mat-error *ngIf="registerForm.controls['password'].errors?.['required']"> Campo Obrigatório</mat-error>
-    <mat-error *ngIf="registerForm.controls['password'].errors?.['minlength']"> A senha deve ter mais que 4 caracteres</mat-error>
+    <mat-error *ngIf="registerForm.controls['password'].errors?.['required']">
+      Campo Obrigatório</mat-error
+    >
+    <mat-error *ngIf="registerForm.controls['password'].errors?.['minlength']">
+      A senha deve ter mais que 4 caracteres</mat-error
+    >
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -56,13 +53,20 @@
     />
     <mat-icon matSuffix (click)="handleShowPassword()">visibility</mat-icon>
 
-    <mat-error *ngIf="registerForm.controls['confirmPassword'].errors?.['required']"> Campo Obrigatório</mat-error>
-    <mat-error *ngIf="registerForm.controls['confirmPassword'].errors?.['minlength']"> A senha deve ter mais que 4 caracteres</mat-error>
+    <mat-error
+      *ngIf="registerForm.controls['confirmPassword'].errors?.['required']"
+    >
+      Campo Obrigatório</mat-error
+    >
+    <mat-error
+      *ngIf="registerForm.controls['confirmPassword'].errors?.['minlength']"
+    >
+      A senha deve ter mais que 4 caracteres</mat-error
+    >
   </mat-form-field>
 
   <div class="buttons">
-    <button class="cancel" (click)="cancel()" >Cancelar</button>
+    <button class="cancel" (click)="cancel()">Cancelar</button>
     <button class="confirm">Confirmar</button>
   </div>
-
 </form>

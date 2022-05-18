@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Appointment } from 'src/app/interfaces/appointments';
-import { AppointmentService } from 'src/app/services/appointment.service';
+import { AppointmentService } from 'src/app/services/appointments/appointment.service';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-appointment-list',
   templateUrl: './appointment-list.component.html',
-  styleUrls: ['./appointment-list.component.scss']
+  styleUrls: ['./appointment-list.component.scss'],
 })
 export class AppointmentListComponent implements OnInit {
   displayedColumns = [
@@ -15,20 +15,24 @@ export class AppointmentListComponent implements OnInit {
     'PROFISSIONAL',
     'DATA',
     'HORA',
-    'actions'
-  ]
-  constructor(private appointmentService: AppointmentService, private router: Router) {
-  }
+    'actions',
+  ];
+  constructor(
+    private appointmentService: AppointmentService,
+    private router: Router,
+    private authentication: AuthenticationService
+  ) {}
 
-  get appointments():Appointment[] {
+  //Usado no [dataSource] da table
+  get appointments(): Appointment[] {
     return this.appointmentService.appointments;
   }
 
   ngOnInit(): void {
     this.appointmentService.getAppointments().subscribe((appointments) => {
-      this.appointmentService.appointments = appointments
-      // console.log(appointments)
-    })
+      //buscando as consultas
+      this.appointmentService.appointments = appointments;
+    });
   }
 
   // forTable
@@ -48,10 +52,10 @@ export class AppointmentListComponent implements OnInit {
   //clicks
   handleDelete(id: number): void {
     this.appointmentService.delete(id).subscribe(() =>
-      this.appointmentService.getAppointments().subscribe((appointments) => { // atualizar as consultas
-        this.appointmentService.appointments = appointments
+      this.appointmentService.getAppointments().subscribe((appointments) => {
+        // atualizar as consultas
+        this.appointmentService.appointments = appointments;
       })
-    )
+    );
   }
-
 }

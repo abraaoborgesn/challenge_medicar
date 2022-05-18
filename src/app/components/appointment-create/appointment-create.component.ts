@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Specialty } from 'src/app/interfaces/specialty';
-import { AppointmentService } from 'src/app/services/appointment.service';
+import { AppointmentService } from 'src/app/services/appointments/appointment.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Doctor } from 'src/app/interfaces/doctor';
 import { Agenda } from 'src/app/interfaces/agenda';
@@ -10,96 +10,91 @@ import { Appointment } from 'src/app/interfaces/appointments';
 @Component({
   selector: 'app-appointment-create',
   templateUrl: './appointment-create.component.html',
-  styleUrls: ['./appointment-create.component.scss']
+  styleUrls: ['./appointment-create.component.scss'],
 })
 export class AppointmentCreateComponent implements OnInit {
-  // medicos: Doctor[]
-  // agendas: Agenda[]
-  medicos2: Doctor[];
-  agendas2: Agenda[];
-  horarios: string[];
+  doctorsFiltered: Doctor[];
+  agendasFiltered: Agenda[];
+  schedule: string[];
   appointment: MakeAppointment;
 
-  habilitarButton: boolean = true
+  habilitarButton: boolean = true;
 
-
-  constructor( private matDialogRef: MatDialogRef<any>, private appointmentService: AppointmentService) {
-    this.medicos2 = []
-    this.agendas2 = []
-    this.horarios = []
-    this.appointment = <MakeAppointment>{}
+  constructor(
+    private matDialogRef: MatDialogRef<any>,
+    private appointmentService: AppointmentService
+  ) {
+    this.doctorsFiltered = [];
+    this.agendasFiltered = [];
+    this.schedule = [];
+    this.appointment = <MakeAppointment>{};
   }
 
   get especialidades(): Specialty[] {
-    return this.appointmentService.especialidades
+    return this.appointmentService.especialidades;
   }
-
   get medicos(): Doctor[] {
-    return this.appointmentService.medicos
+    return this.appointmentService.doctors;
   }
-
   get agendas(): Agenda[] {
-    return this.appointmentService.agendas
+    return this.appointmentService.agendas;
   }
-
 
   ngOnInit(): void {
     this.appointmentService.getSpecialties().subscribe((especialidades) => {
-      this.appointmentService.especialidades = especialidades
-  })
-    this.appointmentService.getMedicos2().subscribe((medicos) => {
-      this.appointmentService.medicos = medicos
-  })
+      this.appointmentService.especialidades = especialidades;
+    });
+    this.appointmentService.getDoctors().subscribe((doctors) => {
+      this.appointmentService.doctors = doctors;
+    });
     this.appointmentService.getAgenda().subscribe((agendas) => {
-      this.appointmentService.agendas = agendas
-    })
-
-}
+      this.appointmentService.agendas = agendas;
+    });
+  }
   // habilitar o button de confirmar
   habilitarForm(): void {
-    this.habilitarButton = !this.habilitarButton
+    this.habilitarButton = !this.habilitarButton;
   }
 
   //Close modal
   handleClose(): void {
-    this.matDialogRef.close()
+    this.matDialogRef.close();
   }
 
   //Buscando os dados
-  handleEspecialidade(value: string): void {
-    let newMedicos = this.medicos.filter(res => {
-      return res.especialidade.nome === value
-    })
-
-    this.medicos2 = [...newMedicos]
+  handleSpecialty(value: string): void {
+    this.doctorsFiltered = this.medicos.filter((res) => {
+      return res.especialidade.nome === value;
+    });
   }
 
-  handleMedico(value: number): void {
-    let newAgendas = this.agendas.filter(res => {
-      return res.medico.id === value
-    })
-
-    this.agendas2 = [...newAgendas]
+  //Filtrando os dados do array de Medicos e Agendas
+  handleDoctor(value: number): void {
+    this.agendasFiltered = this.agendas.filter((res) => {
+      return res.medico.id === value;
+    });
   }
 
   handleData(value: number) {
-    this.horarios = <string[]>(
+    this.schedule = <string[]>(
       this.agendas.find((res) => res.id == value)?.horarios
     );
   }
 
   //Submit
   handleSubmit(): void {
-    // console.log(this.appointment)
-    this.appointmentService.makeAppointment(this.appointment).subscribe((appoint: Appointment) => {
-      let newAppoints = [...this.appointmentService.appointments]
-      newAppoints.push(appoint)
-      this.appointmentService.getAppointments().subscribe((appointments) => { // refresh appointments
-        this.appointmentService.appointments = appointments
-      })
-      this.appointmentService.appointments = newAppoints
-    })
+    this.appointmentService
+      .makeAppointment(this.appointment)
+      .subscribe((appoint: Appointment) => {
+        let newAppoints = [...this.appointmentService.appointments];
+        newAppoints.push(appoint);
+        this.appointmentService.getAppointments().subscribe((appointments) => {
+          // refresh appointments
+          this.appointmentService.appointments = appointments;
+        });
+        this.appointmentService.appointments = newAppoints;
+      });
 
-    this.handleClose()
+    this.handleClose();
   }
 }
