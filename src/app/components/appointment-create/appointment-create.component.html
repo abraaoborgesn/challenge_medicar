@@ -33,13 +33,13 @@
     <mat-form-field appearance="outline">
       <mat-label>Data</mat-label>
       <mat-select
-        [disabled]="agendas.length <= 0"
+        [disabled]="agendasFiltered.length <= 0"
         (selectionChange)="handleData($event.value)"
         [(ngModel)]="appointment.agenda_id"
         name="data"
       >
         <mat-option></mat-option>
-        <mat-option *ngFor="let agenda of agendas" [value]="agenda.id">
+        <mat-option *ngFor="let agenda of agendasFiltered" [value]="agenda.id">
           {{ agenda.dia | date: "dd/MM/yyyy" }}</mat-option
         >
       </mat-select>

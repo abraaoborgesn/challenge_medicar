@@ -1,13 +1,16 @@
 :host {
   height: 95%;
-  // display: block;
 }
+
 .main {
   display: flex;
   flex-direction: column;
   width: 39.2rem;
   height: 100%;
-  // margin-top: 1.4rem;
+}
+
+.mat-card {
+  padding: 16px 8px;
 }
 
 .mat-card:not([class*="mat-elevation-z"]) {
@@ -16,15 +19,15 @@
 
 .newHeader {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 1.25rem;
+  // margin-bottom: 1.10rem;
 }
 
 .title {
   font-size: 1.125rem;
   font-weight: 700;
-  line-height: 1.31rem;
+  // line-height: 1.31rem;
 }
 
 button {
