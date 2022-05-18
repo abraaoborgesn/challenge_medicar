@@ -1,6 +1,7 @@
 table {
   width: 100%;
   background-color: none;
+  margin-top: 19px;
 }
 
 .mat-header-cell {
@@ -40,6 +41,10 @@ th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:
 
 tr.mat-row {
   height: 2rem;
+}
+
+tr.mat-header-row {
+  height: 25px;
 }
 
 ///// BUTTONS
