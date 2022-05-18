@@ -51,7 +51,7 @@ export class AppointmentCreateComponent implements OnInit {
       this.appointmentService.agendas = agendas;
     });
   }
-  // habilitar o button de confirmar
+  //Habilitar o button de confirmar
   habilitarForm(): void {
     this.habilitarButton = !this.habilitarButton;
   }
@@ -61,7 +61,7 @@ export class AppointmentCreateComponent implements OnInit {
     this.matDialogRef.close();
   }
 
-  //Buscando os dados
+  //Buscando as especialidades
   handleSpecialty(value: string): void {
     this.doctorsFiltered = this.medicos.filter((res) => {
       return res.especialidade.nome === value;
