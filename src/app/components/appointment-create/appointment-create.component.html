@@ -1,7 +1,7 @@
 <div class="main">
   <h1 mat-dialog-title>Nova Consulta</h1>
   <!-- ESPECIALIDADES -->
-  <form class="form" (submit)="handleSubmit()">
+  <form class="form">
     <mat-form-field appearance="outline">
       <mat-label>Especialidade</mat-label>
       <mat-select (selectionChange)="handleSpecialty($event.value)">
@@ -9,11 +9,16 @@
         <mat-option
           *ngFor="let especialidade of especialidades"
           [value]="especialidade.nome"
+          (click)="doctorsFiltered.length <= 0 ? temMedico = true : temMedico = false"
         >
           {{ especialidade.nome }}
         </mat-option>
+
       </mat-select>
+
     </mat-form-field>
+    <mat-error *ngIf="temMedico"
+      >Nenhum médico disponível para essa especialidade</mat-error>
 
     <!-- MEDICO -->
     <mat-form-field appearance="outline">
@@ -23,11 +28,14 @@
         (selectionChange)="handleDoctor($event.value)"
       >
         <mat-option></mat-option>
+
         <mat-option *ngFor="let doctor of doctorsFiltered" [value]="doctor.id">
           {{ doctor.nome }}
         </mat-option>
       </mat-select>
     </mat-form-field>
+
+
 
     <!-- DATA -->
     <mat-form-field appearance="outline">
@@ -64,7 +72,7 @@
     <!-- BUTTONS -->
     <div class="buttons">
       <button class="cancel" (click)="handleClose()">Cancelar</button>
-      <button class="confirm" type="submit" [disabled]="habilitarButton">
+      <button class="confirm" type="submit" [disabled]="habilitarButton" (click)="handleSubmit()">
         Confirmar
       </button>
     </div>

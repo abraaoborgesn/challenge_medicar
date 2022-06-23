@@ -67,7 +67,7 @@ export class AuthenticationService {
       verticalPosition: 'top',
       horizontalPosition: 'right',
       panelClass: isError ? 'error-message' : 'sucess-message',
-      duration: 2000,
+      duration: 4000,
     });
   }
 

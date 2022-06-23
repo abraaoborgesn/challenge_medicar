@@ -17,6 +17,7 @@ export class AppointmentCreateComponent implements OnInit {
   agendasFiltered: Agenda[];
   schedule: string[];
   appointment: MakeAppointment;
+  temMedico: boolean = false
 
   habilitarButton: boolean = true;
 
@@ -97,4 +98,5 @@ export class AppointmentCreateComponent implements OnInit {
 
     this.handleClose();
   }
+
 }
